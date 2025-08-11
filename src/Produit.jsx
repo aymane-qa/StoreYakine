@@ -89,7 +89,48 @@ const Produit = () => {
             className="form"
           >
             <input type="hidden" name="_captcha" value="false" />
+            
+        {/* Formulaire de commande */}
+        <section className="order-form" id="commander">
+          <h2>Commander Maintenant</h2>
+          <form 
+            action="https://formsubmit.co/aymanekassid48@gmail.com" 
+            method="POST"
+            className="form"
+          >
+            <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_next" value="http://localhost:3000/merci" />
+            <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
+            <input type="hidden" name="Produit" value={productData.title} />
+
+            <div className="form-group">
+              <label>Nom complet *</label>
+              <input type="text" name="Nom" placeholder="Votre nom" required />
+            </div>
+
+            <div className="form-group">
+              <label>Téléphone *</label>
+              <input type="tel" name="Téléphone" placeholder="Votre numéro" required />
+            </div>
+
+            <div className="form-group">
+              <label>Ville *</label>
+              <input type="text" name="Ville" placeholder="Ville" required />
+            </div>
+
+            <div className="form-group">
+              <label>Adresse complète *</label>
+              <textarea name="Adresse" placeholder="Adresse complète" required></textarea>
+            </div>
+
+            <div className="form-group">
+              <label>Quantité *</label>
+              <input type="number" name="Quantité" min="1" defaultValue={1} required />
+            </div>
+
+            <button type="submit" className="submit-btn">Commander</button>
+          </form>
+        </section>
             <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
             <input type="hidden" name="Produit" value={productData.title} />
 
