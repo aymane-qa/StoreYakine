@@ -429,7 +429,8 @@ description: `
                 className="form"
               >
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://yakinestoree.netlify.app/merci" />
+               <input type="hidden" name="_next" value="https://yakinestoree.netlify.app/merci.html" />
+
 
                 <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
                 <input type="hidden" name="Produit" value={productData.title} />
