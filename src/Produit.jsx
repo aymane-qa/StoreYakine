@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import logoimage from './images/cre-un-logo-lgant-pour-une-boutique-nomme-yakine-store-utilise-uniquement-les-lettres-ys-c.jpg';
 import './Produit.css';
 
 const Produit = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const productData = location.state || {};
 
-  // ✅ Utiliser le premier élément de productData.images comme image principale
+  // ✅ Image principale (première de la liste si dispo)
   const [mainImage, setMainImage] = useState(
     productData.images && productData.images.length > 0
       ? productData.images[0]
@@ -18,7 +17,9 @@ const Produit = () => {
   if (!productData.title) {
     return (
       <div className="product-not-found">
-        <p>Produit non spécifié. Retour à la <Link to="/">page d'accueil</Link>.</p>
+        <p>
+          Produit non spécifié. Retour à la <Link to="/">page d'accueil</Link>.
+        </p>
       </div>
     );
   }
@@ -27,7 +28,10 @@ const Produit = () => {
     price: productData.price || 'Prix non disponible',
     category: productData.category || 'Catégorie non spécifiée',
     stock: productData.stock || 'En stock',
-    description: productData.desc || productData.description || 'Pas de description disponible.'
+    description:
+      productData.desc ||
+      productData.description ||
+      'Pas de description disponible.'
   };
 
   return (
@@ -58,7 +62,9 @@ const Produit = () => {
                     key={index}
                     src={img}
                     alt={`${productData.title} - ${index + 1}`}
-                    className={`thumbnail ${mainImage === img ? 'active' : ''}`}
+                    className={`thumbnail ${
+                      mainImage === img ? 'active' : ''
+                    }`}
                     onClick={() => setMainImage(img)}
                   />
                 ))}
@@ -71,101 +77,100 @@ const Produit = () => {
           <p className="product-description">{productDetails.description}</p>
 
           <ul className="product-info">
-            <li><strong>Prix :</strong> {productDetails.price}</li>
-            <li><strong>Catégorie :</strong> {productDetails.category}</li>
             <li>
-              <strong>Disponibilité :</strong> 
+              <strong>Prix :</strong> {productDetails.price}
+            </li>
+            <li>
+              <strong>Catégorie :</strong> {productDetails.category}
+            </li>
+            <li>
+              <strong>Disponibilité :</strong>{' '}
               <span style={{ color: 'green' }}>{productDetails.stock}</span>
             </li>
           </ul>
         </section>
 
         {/* Formulaire de commande */}
-        <section className="order-form" id="commander">
-          <h2>Commander Maintenant</h2>
-          <form 
-            action="https://formsubmit.co/aymanekassid48@gmail.com" 
-            method="POST"
-            className="form"
-          >
-            <input type="hidden" name="_captcha" value="false" />
-            
-        {/* Formulaire de commande */}
-        <section className="order-form" id="commander">
-          <h2>Commander Maintenant</h2>
-          <form 
-            action="https://formsubmit.co/aymanekassid48@gmail.com" 
-            method="POST"
-            className="form"
-          >
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="http://localhost:3000/merci" />
-            <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
-            <input type="hidden" name="Produit" value={productData.title} />
+                   <section className="order-form" id="commander" dir="rtl">
+              <h2>Commander Maintenant</h2>
+              <form 
+                action="https://formsubmit.co/aymanekassid48@gmail.com" 
+                method="POST"
+                className="form"
+              >
+                <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://yakinestor.netlify.app/merci" />
+=
 
-            <div className="form-group">
-              <label>Nom complet *</label>
-              <input type="text" name="Nom" placeholder="Votre nom" required />
-            </div>
 
-            <div className="form-group">
-              <label>Téléphone *</label>
-              <input type="tel" name="Téléphone" placeholder="Votre numéro" required />
-            </div>
+                
 
-            <div className="form-group">
-              <label>Ville *</label>
-              <input type="text" name="Ville" placeholder="Ville" required />
-            </div>
+                <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
+                <input type="hidden" name="Produit" value={productData.title} />
 
-            <div className="form-group">
-              <label>Adresse complète *</label>
-              <textarea name="Adresse" placeholder="Adresse complète" required></textarea>
-            </div>
+                <div className="form-group">
+                  <label htmlFor="nom">Nom complet <span className="required">*</span></label>
+                  <input 
+                    id="nom" 
+                    type="text" 
+                    name="Nom" 
+                    placeholder="Votre prénom complet" 
+                    required 
+                  />
+                </div>
 
-            <div className="form-group">
-              <label>Quantité *</label>
-              <input type="number" name="Quantité" min="1" defaultValue={1} required />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="telephone">Téléphone <span className="required">*</span></label>
+                  <input 
+                    id="telephone" 
+                    type="tel" 
+                    name="Téléphone" 
+                    placeholder="Votre numéro" 
+                    pattern="[0-9]{10,15}" 
+                    required 
+                  />
+                </div>
 
-            <button type="submit" className="submit-btn">Commander</button>
-          </form>
-        </section>
-            <input type="hidden" name="_subject" value={`Nouvelle commande: ${productData.title}`} />
-            <input type="hidden" name="Produit" value={productData.title} />
+                <div className="form-group">
+                  <label htmlFor="ville">Ville <span className="required">*</span></label>
+                  <input 
+                    id="ville" 
+                    type="text" 
+                    name="Ville" 
+                    placeholder="Ville" 
+                    required 
+                  />
+                </div>
 
-            <div className="form-group">
-              <label>Nom complet *</label>
-              <input type="text" name="Nom" placeholder="Votre nom" required />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="adresse">Adresse complète <span className="required">*</span></label>
+                  <textarea 
+                    id="adresse" 
+                    name="Adresse" 
+                    placeholder="Adresse complète" 
+                    required 
+                  ></textarea>
+                </div>
 
-            <div className="form-group">
-              <label>Téléphone *</label>
-              <input type="tel" name="Téléphone" placeholder="Votre numéro" required />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="quantite">Quantité <span className="required">*</span></label>
+                  <input 
+                    id="quantite" 
+                    type="number" 
+                    name="Quantité" 
+                    min="1" 
+                    defaultValue={1} 
+                    required 
+                  />
+                </div>
 
-            <div className="form-group">
-              <label>Ville *</label>
-              <input type="text" name="Ville" placeholder="Ville" required />
-            </div>
-
-            <div className="form-group">
-              <label>Adresse complète *</label>
-              <textarea name="Adresse" placeholder="Adresse complète" required></textarea>
-            </div>
-
-            <div className="form-group">
-              <label>Quantité *</label>
-              <input type="number" name="Quantité" min="1" defaultValue={1} required />
-            </div>
-
-            <button type="submit" className="submit-btn">Commander</button>
-          </form>
-        </section>
+                <button type="submit" className="submit-btn">Commander</button>
+              </form>
+            </section>
       </main>
 
       {/* Pied de page */}
-  <footer className="footer">
+      <footer className="footer">
         <div className="footer-header">
           <h2>Yakine</h2>
           <p>SHOP</p>
@@ -196,10 +201,6 @@ const Produit = () => {
               <li>Expédition et manutention</li>
             </ul>
           </div>
-        </div>
-
-        <div className="social-icons">
-   
         </div>
 
         <div className="footer-bottom">
