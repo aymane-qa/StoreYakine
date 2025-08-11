@@ -99,8 +99,7 @@ const Produit = () => {
                 className="form"
               >
                 <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://yakinestor.netlify.app/merci" />
-=
+                <input type="hidden" name="_next" value={`${window.location.origin}/merci.html`} />
 
 
                 

@@ -1,6 +1,11 @@
 [build]
-  publish = "dist" # Make sure  this points to your build folder
-  command="npm run build" # Adjust this  if your build command is different
+  publish = "build" # CRA outputs to "build"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/merci*"
+  to = "/merci.html"
+  status = 200
 
 [[redirects]]
   from = "/*"

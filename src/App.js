@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './Landing';
 import Produit from './Produit';
+import Merci from './Merci';
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/produit" element={<Produit />} />
-                    className="thumbnail"
+        <Route path="/merci" element={<Merci />} />
       </Routes>
     </Router>
   );
