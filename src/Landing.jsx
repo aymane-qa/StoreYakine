@@ -19,6 +19,9 @@ import onestep3 from './images/Hef93bc79f13e4a4bbc97bfc4bc79bb60g.webp';
 import onestep4 from './images/20e1736419b937545b3afd0bd3aefe92.jpg'
 import imageCarousel from './images/a-premium-beauty-exhibition-stand-for-yakine-store-a-brand-that-specializes-in-ceramic-hair-strai.jpg';
 import imageCarousel2 from "./images/a-dramatic-high-fashion-advertisement-for-yakine-store-a-luxury-hair-straightener-brand-the-im.jpg";
+import categoryFace from './images/category_face.webp';
+import categoryCosmetic from './images/cosmetic-svgrepo-com.svg';
+import categoryPerfume from './images/perfume-luxury-cologne-scent-svgrepo-com.svg';
 
 import {
   BsGiftFill,
@@ -171,6 +174,12 @@ const offres = [
 const productData = {
   title: "Lisseur Professionnel"
 };
+
+const categories = [
+  { name: 'Cheveux', slug: 'cheveux', img: categoryFace },
+  { name: 'Cosmétiques', slug: 'cosmetiques', img: categoryCosmetic },
+  { name: 'Parfums', slug: 'parfums', img: categoryPerfume }
+];
 
 const Landing = () => {
   const [mainImage, setMainImage] = useState(image1);
@@ -358,6 +367,61 @@ description: `
         <div className="text-center mb-4">
           <h3 className="fw-bold">Meilleurs Lisseurs 2023</h3>
           <h6 className="text-muted">Céramique | Titanium</h6>
+        </div>
+      </div>
+
+      {/* Shop By Category */}
+      <div style={{ textAlign: 'center', padding: '2rem' }}>
+        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Shop By Category</h2>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          {categories.map((category, index) => (
+            <Link
+              key={index}
+              to={`/category/${category.slug}`}
+              state={{ name: category.name }}
+              style={{ textDecoration: 'none' }}
+            >
+              <div style={{ 
+                position: 'relative', 
+                width: '200px', 
+                height: '200px',
+                cursor: 'pointer',
+                overflow: 'hidden',
+                borderRadius: '10px'
+              }}>
+                <img 
+                  src={category.img} 
+                  alt={category.name} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    display: 'block'
+                  }} 
+                />
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '1.2rem',
+                  padding: '1rem',
+                  textAlign: 'center',
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.9)'
+                }}>
+                  {category.name}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 
